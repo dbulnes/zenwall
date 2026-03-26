@@ -1,8 +1,8 @@
 # Zenwall
 
-Block distracting websites. See nature instead.
+Block distracting websites. See something beautiful instead.
 
-Zenwall is a Chrome extension that replaces distracting sites with calming nature photos and witty messages. Fully block sites, or give yourself a daily time budget — when time's up, the wall goes up.
+Zenwall is a Chrome extension that replaces distracting sites with beautiful stock photos and witty messages. Fully block sites, or give yourself a daily time budget — when time's up, the wall goes up.
 
 ## Install
 
@@ -46,13 +46,13 @@ The popup shows how many times you've been blocked and which sites you visit mos
 
 ## What you'll see
 
-When you hit a blocked site, you get a random nature photo and a message. Some are poetic, some are sarcastic, some are zen. Timer expirations get their own set of messages.
+When you hit a blocked site, you get a random photo and a message. Some are poetic, some are sarcastic, some are zen. Timer expirations get their own set of messages.
 
 ![Blocked site example](screenshots/blocked.png)
 
 ## Image Credits
 
-Nature photographs sourced from [Unsplash](https://unsplash.com) via [Lorem Picsum](https://picsum.photos). All images are free to use under the [Unsplash License](https://unsplash.com/license).
+Photos sourced from [Unsplash](https://unsplash.com) via [Lorem Picsum](https://picsum.photos). All images are free to use under the [Unsplash License](https://unsplash.com/license).
 
 ## License
 
