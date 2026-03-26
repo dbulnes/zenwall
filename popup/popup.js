@@ -173,7 +173,8 @@ async function setupBlockButton() {
     const url = currentTab?.url || '';
 
     // Detect if we're on the Zenwall block page
-    if (url.includes(chrome.runtime.id) && url.includes('blocked/blocked.html')) {
+    const blockedPageUrl = chrome.runtime.getURL('blocked/blocked.html');
+    if (url.startsWith(blockedPageUrl)) {
       blockBtn.disabled = true;
       blockBtn.textContent = 'Site already blocked';
       return;
