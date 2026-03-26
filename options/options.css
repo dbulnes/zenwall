@@ -7,8 +7,8 @@
 }
 
 body {
-  background: #0d1512;
-  color: #8aa896;
+  background: #1a1a17;
+  color: #9a9690;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 14px;
   line-height: 1.5;
@@ -23,7 +23,7 @@ body {
 }
 
 h1 {
-  color: #4ade80;
+  color: #c4a882;
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -31,14 +31,14 @@ h1 {
 }
 
 .subtitle {
-  color: #5a7a68;
+  color: #7a7770;
   font-size: 12px;
   margin-bottom: 32px;
 }
 
 .section {
-  background: #111e18;
-  border: 1px solid #1e3328;
+  background: #201f1c;
+  border: 1px solid #2e2e28;
   border-radius: 6px;
   margin-bottom: 16px;
 }
@@ -47,7 +47,7 @@ h1 {
   padding: 14px 18px;
   cursor: pointer;
   font-size: 14px;
-  color: #5a7a68;
+  color: #7a7770;
   user-select: none;
   display: flex;
   align-items: center;
@@ -55,11 +55,11 @@ h1 {
 }
 
 .section summary:hover {
-  color: #8aa896;
+  color: #9a9690;
 }
 
 .section summary::marker {
-  color: #3a5a48;
+  color: #4a4a44;
 }
 
 .section-body {
@@ -67,8 +67,8 @@ h1 {
 }
 
 .badge {
-  background: #1a2b23;
-  color: #5a7a68;
+  background: #2e2e28;
+  color: #7a7770;
   font-size: 11px;
   padding: 2px 8px;
   border-radius: 10px;
@@ -83,28 +83,28 @@ h1 {
 
 input[type="text"] {
   flex: 1;
-  background: #0d1512;
-  border: 1px solid #2a3d32;
+  background: #1a1a17;
+  border: 1px solid #3a3a34;
   border-radius: 4px;
   padding: 8px 12px;
-  color: #d4e7dc;
+  color: #d8d4cc;
   font-size: 13px;
   outline: none;
 }
 
 input[type="text"]:focus {
-  border-color: #4ade80;
+  border-color: #c4a882;
 }
 
 input[type="text"]::placeholder {
-  color: #3a5a48;
+  color: #4a4a44;
 }
 
 button {
-  background: #1a2b23;
-  border: 1px solid #2a3d32;
+  background: #2e2e28;
+  border: 1px solid #3a3a34;
   border-radius: 4px;
-  color: #4ade80;
+  color: #c4a882;
   padding: 8px 16px;
   font-size: 13px;
   cursor: pointer;
@@ -112,7 +112,7 @@ button {
 }
 
 button:hover {
-  background: #2a3d32;
+  background: #3a3a34;
 }
 
 /* Timer row in add form */
@@ -128,12 +128,12 @@ button:hover {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #5a7a68;
+  color: #7a7770;
   cursor: pointer;
 }
 
 .timer-toggle input[type="checkbox"] {
-  accent-color: #4ade80;
+  accent-color: #c4a882;
 }
 
 .timer-input-group {
@@ -148,39 +148,39 @@ button:hover {
 
 .timer-input-group input[type="number"] {
   width: 60px;
-  background: #0d1512;
-  border: 1px solid #2a3d32;
+  background: #1a1a17;
+  border: 1px solid #3a3a34;
   border-radius: 4px;
   padding: 4px 8px;
-  color: #d4e7dc;
+  color: #d8d4cc;
   font-size: 12px;
   outline: none;
   text-align: center;
 }
 
 .timer-input-group input[type="number"]:focus {
-  border-color: #4ade80;
+  border-color: #c4a882;
 }
 
 .timer-unit {
   font-size: 11px;
-  color: #5a7a68;
+  color: #7a7770;
 }
 
 .hint {
-  color: #4a6a58;
+  color: #5a5a54;
   font-size: 11px;
 }
 
 .hint code {
-  color: #6a8a78;
-  background: #141f1a;
+  color: #7a7770;
+  background: #242420;
   padding: 1px 4px;
   border-radius: 2px;
 }
 
 .error {
-  color: #f87171;
+  color: #b85450;
   font-size: 12px;
   min-height: 18px;
   margin-top: 4px;
@@ -191,7 +191,7 @@ button:hover {
 }
 
 .empty-msg {
-  color: #3a5a48;
+  color: #4a4a44;
   font-size: 13px;
   text-align: center;
   padding: 20px 0;
@@ -203,8 +203,8 @@ button:hover {
   align-items: center;
   justify-content: space-between;
   padding: 10px 12px;
-  background: #0d1512;
-  border: 1px solid #1a2b23;
+  background: #1a1a17;
+  border: 1px solid #2a2a24;
   border-radius: 4px;
   margin-bottom: 6px;
 }
@@ -217,7 +217,7 @@ button:hover {
 }
 
 .pattern-text {
-  color: #8aa896;
+  color: #9a9690;
   font-size: 13px;
   font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
   word-break: break-all;
@@ -230,11 +230,11 @@ button:hover {
 }
 
 .mode-blocked {
-  color: #f87171;
+  color: #b85450;
 }
 
 .mode-timer {
-  color: #facc15;
+  color: #d4785c;
 }
 
 .pattern-actions {
@@ -248,7 +248,7 @@ button:hover {
 .pattern-item .timer-btn {
   background: none;
   border: 1px solid transparent;
-  color: #4a6a58;
+  color: #5a5a54;
   font-size: 14px;
   padding: 2px 6px;
   cursor: pointer;
@@ -256,15 +256,15 @@ button:hover {
 }
 
 .pattern-item .timer-btn:hover {
-  color: #facc15;
-  border-color: #facc15;
-  background: rgba(250, 204, 21, 0.1);
+  color: #d4785c;
+  border-color: #d4785c;
+  background: rgba(212, 120, 92, 0.1);
 }
 
 .pattern-item .delete-btn {
   background: none;
   border: 1px solid transparent;
-  color: #4a6a58;
+  color: #5a5a54;
   font-size: 16px;
   padding: 2px 8px;
   cursor: pointer;
@@ -272,13 +272,13 @@ button:hover {
 }
 
 .pattern-item .delete-btn:hover {
-  color: #f87171;
-  border-color: #f87171;
-  background: rgba(248, 113, 113, 0.1);
+  color: #b85450;
+  border-color: #b85450;
+  background: rgba(184, 84, 80, 0.1);
 }
 
 .mode-expired {
-  color: #f87171;
+  color: #b85450;
 }
 
 /* Inline timer editor */
@@ -286,12 +286,12 @@ button:hover {
   width: 100%;
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid #1a2b23;
+  border-top: 1px solid #2a2a24;
 }
 
 .editor-label {
   font-size: 11px;
-  color: #5a7a68;
+  color: #7a7770;
   margin-bottom: 8px;
 }
 
@@ -304,23 +304,23 @@ button:hover {
 
 .editor-input {
   width: 60px;
-  background: #111e18;
-  border: 1px solid #2a3d32;
+  background: #201f1c;
+  border: 1px solid #3a3a34;
   border-radius: 4px;
   padding: 5px 8px;
-  color: #d4e7dc;
+  color: #d8d4cc;
   font-size: 13px;
   text-align: center;
   outline: none;
 }
 
 .editor-input:focus {
-  border-color: #facc15;
+  border-color: #d4785c;
 }
 
 .editor-unit {
   font-size: 11px;
-  color: #5a7a68;
+  color: #7a7770;
 }
 
 .editor-btn-row {
@@ -332,52 +332,52 @@ button:hover {
 .editor-save {
   font-size: 11px;
   padding: 4px 10px;
-  color: #4ade80;
+  color: #c4a882;
 }
 
 .editor-block {
   font-size: 11px;
   padding: 4px 10px;
-  color: #f87171;
-  border-color: #3a1a1a;
-  background: #1a1210;
+  color: #b85450;
+  border-color: #3a2020;
+  background: #1e1816;
 }
 
 .editor-block:hover {
-  background: #2a1a18;
-  border-color: #f87171;
+  background: #2a2018;
+  border-color: #b85450;
 }
 
 .editor-cancel {
   font-size: 11px;
   padding: 4px 10px;
-  color: #5a7a68;
+  color: #7a7770;
   background: none;
   border-color: transparent;
 }
 
 .editor-cancel:hover {
-  color: #8aa896;
+  color: #9a9690;
 }
 
 /* Warning / confirmation area */
 .editor-warning {
   margin-top: 10px;
   padding: 10px;
-  background: #1a1a10;
-  border: 1px solid #3a3520;
+  background: #201c18;
+  border: 1px solid #3a3028;
   border-radius: 4px;
 }
 
 .warning-text {
   font-size: 12px;
-  color: #facc15;
+  color: #d4785c;
   margin-bottom: 8px;
   line-height: 1.5;
 }
 
 .warning-final {
-  color: #f87171;
+  color: #b85450;
 }
 
 .warning-confirm {
@@ -386,16 +386,16 @@ button:hover {
   font-size: 11px;
   padding: 6px 10px;
   margin-bottom: 6px;
-  color: #facc15;
-  background: #1a2b23;
-  border: 1px solid #2a3d32;
+  color: #d4785c;
+  background: #2e2e28;
+  border: 1px solid #3a3a34;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .warning-confirm:hover {
-  background: #2a3d32;
-  border-color: #facc15;
+  background: #3a3a34;
+  border-color: #d4785c;
 }
 
 .warning-cancel {
@@ -403,27 +403,27 @@ button:hover {
   width: 100%;
   font-size: 11px;
   padding: 6px 10px;
-  color: #4ade80;
-  background: #0d1f14;
-  border: 1px solid #1e3328;
+  color: #c4a882;
+  background: #242018;
+  border: 1px solid #3a3428;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
 }
 
 .warning-cancel:hover {
-  background: #1a2b23;
-  border-color: #4ade80;
+  background: #2e2a22;
+  border-color: #c4a882;
 }
 
 .warning-input {
   display: block;
   width: 100%;
-  background: #111e18;
-  border: 1px solid #2a3d32;
+  background: #201f1c;
+  border: 1px solid #3a3a34;
   border-radius: 4px;
   padding: 6px 10px;
-  color: #d4e7dc;
+  color: #d8d4cc;
   font-size: 13px;
   text-align: center;
   outline: none;
@@ -431,7 +431,7 @@ button:hover {
 }
 
 .warning-input:focus {
-  border-color: #facc15;
+  border-color: #d4785c;
 }
 
 @keyframes shake {
@@ -442,7 +442,7 @@ button:hover {
 
 .shake {
   animation: shake 0.3s ease-in-out;
-  border-color: #f87171 !important;
+  border-color: #b85450 !important;
 }
 
 .hidden {
