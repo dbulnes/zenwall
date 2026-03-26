@@ -113,9 +113,14 @@ function init() {
   // Hide blocked URL element
   urlEl.style.display = 'none';
 
-  // Go back button
+  // Go back button — if the previous page is the blocked site itself,
+  // going back would just re-trigger the block. Redirect to DuckDuckGo instead.
+  const wouldLoop = reason === 'timer' && blockedUrl;
+  backBtn.textContent = wouldLoop ? 'Go to DuckDuckGo' : 'Go Back';
   backBtn.addEventListener('click', () => {
-    if (window.history.length > 1) {
+    if (wouldLoop) {
+      window.location.href = 'https://duckduckgo.com';
+    } else if (window.history.length > 1) {
       window.history.back();
     } else {
       window.close();
