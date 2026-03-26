@@ -5,10 +5,13 @@ A Chrome extension that blocks distracting websites and replaces them with calmi
 ## Features
 
 - **Wildcard pattern matching** — block `*.reddit.com` (all subdomains), `example.com/*` (all paths), or exact domains
-- **Cross-machine sync** — uses `chrome.storage.sync` to sync your block list across machines via your Chrome profile, no login required
+- **Quick-block from toolbar** — block the current site with one click, choose between blocking the entire domain or a specific URL
+- **Daily time limits** — optionally allow a site for X minutes per day instead of fully blocking it; the timer counts down in real-time and blocks the site when time runs out, even mid-browse
+- **Block stats dashboard** — see total blocks, top blocked domain, and a bar chart of your most-blocked sites in the popup
+- **Cross-machine sync** — uses `chrome.storage.sync` to sync your block list across machines via your Chrome profile
 - **30 nature photographs** — randomly selected on each block
-- **30+ messages** — poetic, sarcastic, clever, and zen, randomly rotated
-- **No easy bypass** — the blocked page has no unblock button; managing the list requires navigating to the extension's options page
+- **60+ messages** — poetic, sarcastic, clever, and zen tones for both blocks and timer expirations
+- **No easy bypass** — managing the block list requires navigating to settings; increasing a timer limit requires multi-step confirmation
 
 ## Setup & Install (Local Development)
 
@@ -32,39 +35,55 @@ A Chrome extension that blocks distracting websites and replaces them with calmi
 
 After pulling new changes, go to `chrome://extensions` and click the refresh icon on the Zenwall card.
 
-
 ## Usage
 
-1. Click the Zenwall icon in your toolbar
-2. Click "Manage blocked sites" to open settings
-3. Expand "Add New Pattern" and enter a URL pattern:
-   - `*.reddit.com` — blocks reddit and all subdomains
-   - `news.ycombinator.com` — blocks the exact domain
-   - `example.com/some/path/*` — blocks a specific path prefix
-4. Navigate to a blocked site to see it in action
+### Blocking a site
 
-To remove a pattern, open the options page, expand "Manage Blocked Sites", and delete the entry (confirmation required).
+1. Navigate to the site you want to block
+2. Click the Zenwall icon in your toolbar
+3. Click the block button and choose:
+   - **Block entire domain** — fully blocks the domain
+   - **Block this URL** — blocks the specific path
+   - **Set daily time limit** — allows the site for a set number of minutes per day
+
+### Managing sites
+
+Open the settings page via "Manage blocked sites" in the popup. From there you can:
+- Add new patterns with optional time limits
+- Edit timer durations (with friction for increases)
+- Switch between fully blocked and timed modes
+- Remove patterns
+
+### Timer behavior
+
+- Timer counts down while you're actively browsing the site
+- When time runs out, you're immediately redirected to the block page with a timer-specific message
+- Timer resets at midnight each day
+- Increasing an expired timer resumes from where you left off
 
 ## Project Structure
 
 ```
 manifest.json          Manifest V3 definition
-background.js          Service worker — syncs patterns to declarativeNetRequest rules
+background.js          Service worker — rules sync, timer engine, message handlers
 lib/
-  storage.js           chrome.storage.sync/local abstraction
+  storage.js           chrome.storage abstraction, timer usage tracking
   patterns.js          Wildcard pattern → regex rule converter
-popup/                 Toolbar popup (status + link to settings)
-options/               Full options page for managing the block list
-blocked/               The blocked page (nature image + message)
+  matcher.js           Runtime URL-to-pattern matching
+popup/                 Toolbar popup (block button, timer status, stats)
+options/               Settings page (pattern management, timer editor)
+blocked/               Block page (nature image + message)
 images/                30 bundled nature photographs
 icons/                 Extension icons
 ```
 
 ## How It Works
 
-When you add a pattern, the service worker converts it to a `declarativeNetRequest` dynamic rule with a regex filter. Chrome intercepts matching navigations at the browser engine level and redirects to the bundled blocked page, which picks a random image and message.
+Fully blocked sites use `declarativeNetRequest` dynamic rules — Chrome intercepts matching navigations at the browser engine level and redirects to the block page.
 
-Storage uses `chrome.storage.sync` (falls back to `chrome.storage.local` if sync is unavailable), so your block list travels with your Chrome profile.
+Timed sites are excluded from static rules and instead managed dynamically by the background service worker, which tracks active browsing time with 1-second precision and redirects via `chrome.tabs.update` when the limit is reached.
+
+Storage uses `chrome.storage.sync` for patterns (falls back to local), and `chrome.storage.local` for timer usage data.
 
 ## Image Credits
 
