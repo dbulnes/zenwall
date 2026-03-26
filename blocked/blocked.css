@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+#background {
+  position: fixed;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  transition: opacity 0.8s ease;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 40px;
+  text-align: center;
+}
+
+.message {
+  color: #fff;
+  font-size: 28px;
+  line-height: 1.5;
+  max-width: 700px;
+  margin-bottom: 30px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  font-style: italic;
+}
+
+.blocked-url {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
+  margin-bottom: 30px;
+  word-break: break-all;
+  max-width: 500px;
+}
+
+.back-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 10px 28px;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+  backdrop-filter: blur(4px);
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}

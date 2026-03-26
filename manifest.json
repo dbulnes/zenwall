@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "BlockSite",
+  "version": "1.0.0",
+  "description": "Block distracting websites with calming nature scenes and witty messages.",
+  "permissions": [
+    "storage",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "options_page": "options/options.html",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "blocked/blocked.html",
+        "blocked/blocked.css",
+        "blocked/blocked.js",
+        "images/*"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

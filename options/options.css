@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #0f0f1a;
+  color: #c0c0c0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+h1 {
+  color: #a8d8a8;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 12px;
+  margin-bottom: 32px;
+}
+
+.section {
+  background: #161625;
+  border: 1px solid #252540;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.section summary {
+  padding: 14px 18px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #888;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section summary:hover {
+  color: #b0b0b0;
+}
+
+.section summary::marker {
+  color: #444;
+}
+
+.section-body {
+  padding: 0 18px 18px;
+}
+
+.badge {
+  background: #252540;
+  color: #666;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: auto;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+input[type="text"] {
+  flex: 1;
+  background: #0f0f1a;
+  border: 1px solid #303050;
+  border-radius: 4px;
+  padding: 8px 12px;
+  color: #e0e0e0;
+  font-size: 13px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: #a8d8a8;
+}
+
+input[type="text"]::placeholder {
+  color: #444;
+}
+
+button {
+  background: #252540;
+  border: 1px solid #353560;
+  border-radius: 4px;
+  color: #a8d8a8;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background: #353560;
+}
+
+.hint {
+  color: #555;
+  font-size: 11px;
+}
+
+.hint code {
+  color: #777;
+  background: #1a1a2e;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+
+.error {
+  color: #e07070;
+  font-size: 12px;
+  min-height: 18px;
+  margin-top: 4px;
+}
+
+.patterns-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.empty-msg {
+  color: #444;
+  font-size: 13px;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.pattern-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #0f0f1a;
+  border: 1px solid #1e1e35;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+.pattern-item .pattern-text {
+  color: #b0b0b0;
+  font-size: 13px;
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  word-break: break-all;
+}
+
+.pattern-item .delete-btn {
+  background: none;
+  border: 1px solid transparent;
+  color: #555;
+  font-size: 16px;
+  padding: 2px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.pattern-item .delete-btn:hover {
+  color: #e07070;
+  border-color: #e07070;
+  background: rgba(224, 112, 112, 0.1);
+}

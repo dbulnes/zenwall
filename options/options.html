@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlockSite Settings</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <h1>BlockSite Settings</h1>
+    <p class="subtitle">Manage your blocked sites. Changes sync across your Chrome profile.</p>
+
+    <details class="section" id="add-section">
+      <summary>Add New Pattern</summary>
+      <div class="section-body">
+        <div class="input-row">
+          <input type="text" id="pattern-input" placeholder="e.g. *.reddit.com or news.ycombinator.com">
+          <button id="add-btn">Add</button>
+        </div>
+        <p class="hint">
+          Wildcards: <code>*.example.com</code> (all subdomains),
+          <code>example.com/*</code> (all paths),
+          <code>example.com</code> (exact domain)
+        </p>
+        <p class="error" id="error-msg"></p>
+      </div>
+    </details>
+
+    <details class="section" id="list-section">
+      <summary>Manage Blocked Sites <span id="count-badge" class="badge">0</span></summary>
+      <div class="section-body">
+        <div id="patterns-list" class="patterns-list">
+          <p class="empty-msg">No sites blocked yet.</p>
+        </div>
+      </div>
+    </details>
+  </div>
+  <script src="options.js" type="module"></script>
+</body>
+</html>
