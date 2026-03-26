@@ -110,6 +110,58 @@ button:hover {
   background: #353560;
 }
 
+/* Timer row in add form */
+.timer-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.timer-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #888;
+  cursor: pointer;
+}
+
+.timer-toggle input[type="checkbox"] {
+  accent-color: #a8d8a8;
+}
+
+.timer-input-group {
+  display: none;
+  align-items: center;
+  gap: 4px;
+}
+
+.timer-input-group.visible {
+  display: flex;
+}
+
+.timer-input-group input[type="number"] {
+  width: 60px;
+  background: #0f0f1a;
+  border: 1px solid #303050;
+  border-radius: 4px;
+  padding: 4px 8px;
+  color: #e0e0e0;
+  font-size: 12px;
+  outline: none;
+  text-align: center;
+}
+
+.timer-input-group input[type="number"]:focus {
+  border-color: #a8d8a8;
+}
+
+.timer-unit {
+  font-size: 11px;
+  color: #666;
+}
+
 .hint {
   color: #555;
   font-size: 11px;
@@ -152,11 +204,55 @@ button:hover {
   margin-bottom: 6px;
 }
 
-.pattern-item .pattern-text {
+.pattern-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pattern-text {
   color: #b0b0b0;
   font-size: 13px;
   font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
   word-break: break-all;
+}
+
+.pattern-mode {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.mode-blocked {
+  color: #e07070;
+}
+
+.mode-timer {
+  color: #d4a85c;
+}
+
+.pattern-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-left: 12px;
+}
+
+.pattern-item .timer-btn {
+  background: none;
+  border: 1px solid transparent;
+  color: #555;
+  font-size: 14px;
+  padding: 2px 6px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.pattern-item .timer-btn:hover {
+  color: #d4a85c;
+  border-color: #d4a85c;
+  background: rgba(212, 168, 92, 0.1);
 }
 
 .pattern-item .delete-btn {
@@ -167,8 +263,6 @@ button:hover {
   padding: 2px 8px;
   cursor: pointer;
   border-radius: 3px;
-  flex-shrink: 0;
-  margin-left: 12px;
 }
 
 .pattern-item .delete-btn:hover {

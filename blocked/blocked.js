@@ -39,10 +39,40 @@ const MESSAGES = [
   "Empty your mind. Empty your tabs. Find peace.",
 ];
 
+const TIMER_MESSAGES = [
+  // Poetic
+  "Your time flowed like water through cupped hands. Beautiful while it lasted.",
+  "The hourglass has spoken. Tomorrow, it turns again.",
+  "Every minute was a gift. You unwrapped them all.",
+  "The sun sets even on the best of days. Your time here has set.",
+
+  // Sarcastic
+  "Time's up! You burned through your minutes like they were going out of style.",
+  "Your daily pass has expired. The bouncer says 'maybe tomorrow.'",
+  "You speedran your time limit. New personal best?",
+  "The meter ran out. No amount of refreshing will feed it more coins.",
+  "You had minutes. You spent them. The economy of attention is unforgiving.",
+  "And just like that, your free trial for today has ended.",
+
+  // Clever
+  "You had a budget of minutes. You spent them all. No credit available.",
+  "Timer expired. Your past self was generous, but not THAT generous.",
+  "You rationed your time here. The rations have run out.",
+  "Your daily allowance has been fully claimed. Receipt available: right here.",
+  "The clock doesn't lie. Well, it can't. It's a clock.",
+
+  // Zen
+  "The allotted time has passed like clouds across the sky. Let it go.",
+  "Your window of time has gently closed. Step away from the screen.",
+  "You were given time, and you used it. Now, be present elsewhere.",
+  "The timer rings not as punishment, but as a gentle reminder to live.",
+  "Minutes are like breaths. You've taken yours. Now exhale and move on.",
+];
+
 const IMAGE_COUNT = 30;
 
-function getRandomMessage() {
-  return MESSAGES[Math.floor(Math.random() * MESSAGES.length)];
+function getRandom(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }
 
 function getRandomImageUrl() {
@@ -51,22 +81,34 @@ function getRandomImageUrl() {
   return chrome.runtime.getURL(`images/nature-${num}.jpg`);
 }
 
-function getBlockedUrl() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get('url') || '';
-}
-
 function init() {
   const bg = document.getElementById('background');
   const messageEl = document.getElementById('message');
   const urlEl = document.getElementById('blocked-url');
+  const timerInfoEl = document.getElementById('timer-info');
   const backBtn = document.getElementById('go-back');
+
+  const params = new URLSearchParams(window.location.search);
+  const reason = params.get('reason');
+  const blockedUrl = params.get('url') || '';
 
   // Set random background
   bg.style.backgroundImage = `url('${getRandomImageUrl()}')`;
 
-  // Set random message
-  messageEl.textContent = getRandomMessage();
+  // Pick message based on reason
+  if (reason === 'timer') {
+    messageEl.textContent = getRandom(TIMER_MESSAGES);
+    // Show timer info subtitle
+    if (timerInfoEl && blockedUrl) {
+      try {
+        const domain = new URL(blockedUrl).hostname.replace(/^www\./, '');
+        timerInfoEl.textContent = `Your daily limit for ${domain} has been reached. Resets tomorrow.`;
+        timerInfoEl.style.display = 'block';
+      } catch {}
+    }
+  } else {
+    messageEl.textContent = getRandom(MESSAGES);
+  }
 
   // Hide blocked URL element
   urlEl.style.display = 'none';

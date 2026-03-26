@@ -18,6 +18,16 @@
           <input type="text" id="pattern-input" placeholder="e.g. *.reddit.com or news.ycombinator.com">
           <button id="add-btn">Add</button>
         </div>
+        <div class="timer-row">
+          <label class="timer-toggle">
+            <input type="checkbox" id="timer-enabled">
+            <span>Daily time limit</span>
+          </label>
+          <div class="timer-input-group" id="timer-input-group">
+            <input type="number" id="timer-minutes" min="1" max="480" value="30">
+            <span class="timer-unit">min/day</span>
+          </div>
+        </div>
         <p class="hint">
           Wildcards: <code>*.example.com</code> (all subdomains),
           <code>example.com/*</code> (all paths),

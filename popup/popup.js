@@ -5,17 +5,35 @@ const blockSection = document.getElementById('block-section');
 const choiceDialog = document.getElementById('choice-dialog');
 const blockDomainBtn = document.getElementById('block-domain');
 const blockUrlBtn = document.getElementById('block-url');
+const timerDomainBtn = document.getElementById('timer-domain-btn');
 const choiceCancelBtn = document.getElementById('choice-cancel');
 const confirmMsg = document.getElementById('confirm-msg');
 const totalBlocksEl = document.getElementById('total-blocks');
 const topDomainEl = document.getElementById('top-domain');
 const domainBarsEl = document.getElementById('domain-bars');
+const timerStatusEl = document.getElementById('timer-status');
+const timerDomainEl = document.getElementById('timer-domain');
+const timerBarFill = document.getElementById('timer-bar-fill');
+const timerRemainingEl = document.getElementById('timer-remaining');
+const timerSetup = document.getElementById('timer-setup');
+const timerSetupDomain = document.getElementById('timer-setup-domain');
+const timerSetupMinutes = document.getElementById('timer-setup-minutes');
+const timerSetupConfirm = document.getElementById('timer-setup-confirm');
+const timerSetupCancel = document.getElementById('timer-setup-cancel');
 
 let currentTab = null;
 
 async function getCurrentTab() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   return tab;
+}
+
+function formatTime(seconds) {
+  if (seconds <= 0) return '0s';
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  if (m === 0) return `${s}s`;
+  return `${m}m ${s}s`;
 }
 
 async function updateStatus() {
@@ -48,7 +66,6 @@ async function updateStats() {
       topDomainEl.textContent = '-';
     }
 
-    // Render top 5 domain bars
     domainBarsEl.innerHTML = '';
     const top5 = sorted.slice(0, 5);
     if (top5.length === 0) return;
@@ -81,7 +98,37 @@ async function updateStats() {
       row.appendChild(countEl);
       domainBarsEl.appendChild(row);
     }
-  } catch { /* stats unavailable */ }
+  } catch {}
+}
+
+async function checkTimerStatus() {
+  if (!currentTab?.url) return;
+  try {
+    const status = await chrome.runtime.sendMessage({
+      type: 'getTimerStatus',
+      url: currentTab.url,
+    });
+    if (!status?.active) return;
+
+    timerStatusEl.classList.remove('hidden');
+
+    const domain = new URL(currentTab.url).hostname.replace(/^www\./, '');
+    timerDomainEl.textContent = domain;
+
+    const totalSeconds = status.timerMinutes * 60;
+    const pct = Math.round((status.elapsedSeconds / totalSeconds) * 100);
+    timerBarFill.style.width = `${Math.min(pct, 100)}%`;
+
+    if (status.expired) {
+      timerBarFill.classList.add('expired');
+      timerRemainingEl.textContent = 'Time expired for today';
+    } else {
+      timerRemainingEl.textContent = `${formatTime(status.remainingSeconds)} remaining today`;
+    }
+
+    // Hide block button since site is already managed
+    blockSection.classList.add('hidden');
+  } catch {}
 }
 
 async function setupBlockButton() {
@@ -101,6 +148,19 @@ async function setupBlockButton() {
   }
 }
 
+function hideAll() {
+  blockSection.classList.add('hidden');
+  choiceDialog.classList.add('hidden');
+  timerSetup.classList.add('hidden');
+}
+
+function showConfirm(text) {
+  hideAll();
+  confirmMsg.textContent = text;
+  confirmMsg.classList.remove('hidden');
+  updateStatus();
+}
+
 blockBtn.addEventListener('click', () => {
   if (!currentTab?.url) return;
 
@@ -108,16 +168,19 @@ blockBtn.addEventListener('click', () => {
   const domain = parsed.hostname.replace(/^www\./, '');
   const fullPath = domain + parsed.pathname;
 
-  blockDomainBtn.textContent = `Entire domain: ${domain}`;
+  blockDomainBtn.textContent = `Block entire domain: ${domain}`;
   blockDomainBtn.dataset.pattern = domain;
 
   if (parsed.pathname && parsed.pathname !== '/') {
-    blockUrlBtn.textContent = `This URL: ${fullPath}`;
+    blockUrlBtn.textContent = `Block this URL: ${fullPath}`;
     blockUrlBtn.dataset.pattern = fullPath;
     blockUrlBtn.classList.remove('hidden');
   } else {
     blockUrlBtn.classList.add('hidden');
   }
+
+  timerDomainBtn.textContent = `Set daily time limit for ${domain}`;
+  timerDomainBtn.dataset.domain = domain;
 
   blockSection.classList.add('hidden');
   choiceDialog.classList.remove('hidden');
@@ -125,14 +188,37 @@ blockBtn.addEventListener('click', () => {
 
 async function doBlock(pattern) {
   await chrome.runtime.sendMessage({ type: 'addPattern', pattern });
-  choiceDialog.classList.add('hidden');
-  confirmMsg.textContent = `Blocked: ${pattern}`;
-  confirmMsg.classList.remove('hidden');
-  updateStatus();
+  showConfirm(`Blocked: ${pattern}`);
 }
 
 blockDomainBtn.addEventListener('click', () => doBlock(blockDomainBtn.dataset.pattern));
 blockUrlBtn.addEventListener('click', () => doBlock(blockUrlBtn.dataset.pattern));
+
+// Timer flow
+timerDomainBtn.addEventListener('click', () => {
+  const domain = timerDomainBtn.dataset.domain;
+  timerSetupDomain.textContent = domain;
+  timerSetup.dataset.domain = domain;
+  choiceDialog.classList.add('hidden');
+  timerSetup.classList.remove('hidden');
+});
+
+timerSetupConfirm.addEventListener('click', async () => {
+  const domain = timerSetup.dataset.domain;
+  const minutes = parseInt(timerSetupMinutes.value, 10);
+  if (!minutes || minutes < 1) return;
+  await chrome.runtime.sendMessage({
+    type: 'addPattern',
+    pattern: domain,
+    timerMinutes: minutes,
+  });
+  showConfirm(`${domain}: ${minutes} min/day limit set`);
+});
+
+timerSetupCancel.addEventListener('click', () => {
+  timerSetup.classList.add('hidden');
+  blockSection.classList.remove('hidden');
+});
 
 choiceCancelBtn.addEventListener('click', () => {
   choiceDialog.classList.add('hidden');
@@ -147,4 +233,4 @@ settingsLink.addEventListener('click', (e) => {
 // Init
 updateStatus();
 updateStats();
-setupBlockButton();
+setupBlockButton().then(checkTimerStatus);

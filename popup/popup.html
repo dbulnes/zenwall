@@ -9,6 +9,15 @@
     <h1>Zenwall</h1>
     <p id="status">Loading...</p>
 
+    <!-- Timer status for current site (shown when active) -->
+    <div id="timer-status" class="timer-status hidden">
+      <div class="timer-domain" id="timer-domain"></div>
+      <div class="timer-bar-track">
+        <div class="timer-bar-fill" id="timer-bar-fill"></div>
+      </div>
+      <div class="timer-remaining" id="timer-remaining"></div>
+    </div>
+
     <!-- Block current site -->
     <div id="block-section">
       <button id="block-btn" class="block-btn">Block this site</button>
@@ -16,10 +25,24 @@
 
     <!-- Choice dialog (hidden by default) -->
     <div id="choice-dialog" class="choice-dialog hidden">
-      <p class="choice-label">What do you want to block?</p>
+      <p class="choice-label">What do you want to do?</p>
       <button id="block-domain" class="choice-btn"></button>
       <button id="block-url" class="choice-btn choice-btn-secondary"></button>
+      <button id="timer-domain-btn" class="choice-btn choice-btn-timer"></button>
       <button id="choice-cancel" class="choice-cancel">Cancel</button>
+    </div>
+
+    <!-- Timer input (hidden by default) -->
+    <div id="timer-setup" class="timer-setup hidden">
+      <p class="choice-label">Daily time limit for <strong id="timer-setup-domain"></strong></p>
+      <div class="timer-setup-row">
+        <input type="number" id="timer-setup-minutes" min="1" max="480" value="30">
+        <span class="timer-setup-unit">minutes/day</span>
+      </div>
+      <div class="timer-setup-actions">
+        <button id="timer-setup-confirm" class="choice-btn">Set limit</button>
+        <button id="timer-setup-cancel" class="choice-cancel">Cancel</button>
+      </div>
     </div>
 
     <!-- Confirmation (hidden by default) -->
