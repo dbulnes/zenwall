@@ -233,4 +233,8 @@ settingsLink.addEventListener('click', (e) => {
 // Init
 updateStatus();
 updateStats();
-setupBlockButton().then(checkTimerStatus);
+setupBlockButton().then(() => {
+  checkTimerStatus();
+  // Refresh timer countdown every second while popup is open
+  setInterval(checkTimerStatus, 1000);
+});
