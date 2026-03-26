@@ -170,13 +170,22 @@ function renderTimer() {
 async function setupBlockButton() {
   try {
     currentTab = await getCurrentTab();
-    if (!currentTab?.url || !currentTab.url.startsWith('http')) {
+    const url = currentTab?.url || '';
+
+    // Detect if we're on the Zenwall block page
+    if (url.includes(chrome.runtime.id) && url.includes('blocked/blocked.html')) {
+      blockBtn.disabled = true;
+      blockBtn.textContent = 'Site already blocked';
+      return;
+    }
+
+    if (!url.startsWith('http')) {
       blockBtn.disabled = true;
       blockBtn.textContent = 'Cannot block this page';
       return;
     }
 
-    const parsed = new URL(currentTab.url);
+    const parsed = new URL(url);
     blockBtn.textContent = `Block ${parsed.hostname}`;
   } catch {
     blockBtn.disabled = true;
