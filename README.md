@@ -48,6 +48,10 @@ The popup shows how many times you've been blocked and which sites you visit mos
 
 When you hit a blocked site, you get a random nature photo and a message. Some are poetic, some are sarcastic, some are zen. Timer expirations get their own set of messages.
 
+## Image Credits
+
+Nature photographs sourced from [Unsplash](https://unsplash.com) via [Lorem Picsum](https://picsum.photos). All images are free to use under the [Unsplash License](https://unsplash.com/license).
+
 ## License
 
 MIT
