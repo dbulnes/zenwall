@@ -59,15 +59,6 @@ html, body {
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
 }
 
-.blocked-url {
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 12px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, monospace;
-  margin-bottom: 30px;
-  word-break: break-all;
-  max-width: 500px;
-}
-
 .back-btn {
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.25);

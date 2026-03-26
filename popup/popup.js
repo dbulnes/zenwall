@@ -145,7 +145,7 @@ function renderTimer() {
   const limitSeconds = timerBaseline.timerMinutes * 60;
 
   if (timerBaseline.expired) {
-    timerBarFill.style.width = '100%';
+    timerBarFill.style.width = '0%';
     timerBarFill.classList.add('expired');
     timerRemainingEl.textContent = 'Time expired for today';
     return;
@@ -154,9 +154,9 @@ function renderTimer() {
   // Interpolate: add seconds since we last fetched from background
   const elapsed = timerBaseline.elapsedSeconds + (Date.now() - timerBaseline.fetchedAt) / 1000;
   const remaining = Math.max(0, limitSeconds - elapsed);
-  const pct = Math.min(100, Math.round((elapsed / limitSeconds) * 100));
+  const remainingPct = Math.max(0, Math.round((remaining / limitSeconds) * 100));
 
-  timerBarFill.style.width = `${pct}%`;
+  timerBarFill.style.width = `${remainingPct}%`;
   timerBarFill.classList.remove('expired');
 
   if (remaining <= 0) {

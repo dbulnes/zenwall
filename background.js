@@ -1,7 +1,7 @@
 import {
   getBlockedPatterns, getFullyBlockedPatterns, getTimerPatterns,
   addPattern, updatePattern, getStats, recordBlock,
-  getTimerUsage, addTimerSeconds, getElapsedSeconds,
+  addTimerSeconds, getElapsedSeconds,
   onPatternsChanged,
 } from './lib/storage.js';
 import { buildAllRules } from './lib/patterns.js';
@@ -32,6 +32,9 @@ async function blockTab(tabId, url, reason) {
   await chrome.tabs.update(tabId, {
     url: `${blockedPageUrl}?url=${encoded}&reason=${reason}`,
   });
+  try {
+    recordBlock(new URL(url).hostname);
+  } catch {}
 }
 
 let lastTickTime = Date.now();
@@ -62,10 +65,6 @@ async function onTimerTick() {
 
   if (totalElapsed >= limitSeconds) {
     blockTab(tab.id, tab.url, 'timer');
-    try {
-      const domain = new URL(tab.url).hostname;
-      recordBlock(domain);
-    } catch {}
   }
 }
 
@@ -94,29 +93,21 @@ async function onNavigation(details) {
   const match = findMatchingPattern(details.url, timerPatterns);
   if (!match) return;
 
-  const expired = await checkTimerExpired(match);
-  if (expired) {
+  if (await checkTimerExpired(match)) {
     blockTab(details.tabId, details.url, 'timer');
-    try {
-      const domain = new URL(details.url).hostname;
-      recordBlock(domain);
-    } catch {}
   }
 }
 
 // --- Lifecycle ---
 
-chrome.runtime.onInstalled.addListener(async () => {
+async function initialize() {
   await syncRules();
   ensureAlarmKeepalive();
   startTickLoop();
-});
+}
 
-chrome.runtime.onStartup.addListener(async () => {
-  await syncRules();
-  ensureAlarmKeepalive();
-  startTickLoop();
-});
+chrome.runtime.onInstalled.addListener(initialize);
+chrome.runtime.onStartup.addListener(initialize);
 
 // Keepalive alarm also restarts the tick loop if service worker was suspended
 chrome.alarms.onAlarm.addListener((alarm) => {
@@ -143,9 +134,7 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 });
 
 // Re-sync whenever patterns change
-onPatternsChanged(async () => {
-  await syncRules();
-});
+onPatternsChanged(syncRules);
 
 // Start tick loop immediately when script loads
 startTickLoop();

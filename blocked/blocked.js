@@ -84,7 +84,6 @@ function getRandomImageUrl() {
 function init() {
   const bg = document.getElementById('background');
   const messageEl = document.getElementById('message');
-  const urlEl = document.getElementById('blocked-url');
   const timerInfoEl = document.getElementById('timer-info');
   const backBtn = document.getElementById('go-back');
 
@@ -110,12 +109,7 @@ function init() {
     messageEl.textContent = getRandom(MESSAGES);
   }
 
-  // Hide blocked URL element
-  urlEl.style.display = 'none';
-
-  // Go back button — if the previous page is the blocked site itself,
-  // going back would just re-trigger the block. Redirect to DuckDuckGo instead.
-  const wouldLoop = reason === 'timer' && blockedUrl;
+  const wouldLoop = !!blockedUrl;
   backBtn.textContent = wouldLoop ? 'Go to DuckDuckGo' : 'Go Back';
   backBtn.addEventListener('click', () => {
     if (wouldLoop) {
