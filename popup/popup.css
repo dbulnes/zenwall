@@ -8,8 +8,8 @@
 
 body {
   width: 300px;
-  background: #1a1a2e;
-  color: #e0e0e0;
+  background: #0d1512;
+  color: #d4e7dc;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
@@ -23,14 +23,14 @@ body {
 
 h1 {
   font-size: 18px;
-  color: #a8d8a8;
+  color: #4ade80;
   margin-bottom: 12px;
   font-weight: 700;
   letter-spacing: -0.03em;
 }
 
 #status {
-  color: #b0b0b0;
+  color: #5a7a68;
   margin-bottom: 16px;
   font-size: 13px;
 }
@@ -39,9 +39,9 @@ h1 {
 .block-btn {
   width: 100%;
   padding: 10px;
-  background: #2a2a4a;
-  color: #e0e0e0;
-  border: 1px solid #3a3a5a;
+  background: #1a2b23;
+  color: #d4e7dc;
+  border: 1px solid #2a3d32;
   border-radius: 6px;
   font-size: 13px;
   cursor: pointer;
@@ -50,17 +50,17 @@ h1 {
 }
 
 .block-btn:hover {
-  background: #c0392b;
-  border-color: #c0392b;
+  background: #f87171;
+  border-color: #f87171;
   color: #fff;
 }
 
 .block-btn:disabled {
   opacity: 0.4;
   cursor: default;
-  background: #2a2a4a;
-  border-color: #3a3a5a;
-  color: #b0b0b0;
+  background: #1a2b23;
+  border-color: #2a3d32;
+  color: #5a7a68;
 }
 
 /* Choice dialog */
@@ -70,7 +70,7 @@ h1 {
 
 .choice-label {
   font-size: 12px;
-  color: #b0b0b0;
+  color: #5a7a68;
   margin-bottom: 8px;
 }
 
@@ -79,9 +79,9 @@ h1 {
   width: 100%;
   padding: 8px 10px;
   margin-bottom: 6px;
-  background: #2a2a4a;
-  color: #e0e0e0;
-  border: 1px solid #3a3a5a;
+  background: #1a2b23;
+  color: #d4e7dc;
+  border: 1px solid #2a3d32;
   border-radius: 5px;
   font-size: 12px;
   cursor: pointer;
@@ -90,49 +90,49 @@ h1 {
 }
 
 .choice-btn:hover {
-  background: #c0392b;
-  border-color: #c0392b;
+  background: #f87171;
+  border-color: #f87171;
   color: #fff;
 }
 
 .choice-btn-secondary:hover {
-  background: #8e44ad;
-  border-color: #8e44ad;
+  background: #a78bfa;
+  border-color: #a78bfa;
 }
 
 .choice-btn-timer:hover {
-  background: #d4a85c;
-  border-color: #d4a85c;
-  color: #1a1a2e;
+  background: #facc15;
+  border-color: #facc15;
+  color: #0d1512;
 }
 
 .choice-cancel {
   background: none;
   border: none;
-  color: #6b7b8d;
+  color: #5a7a68;
   font-size: 11px;
   cursor: pointer;
   margin-top: 4px;
 }
 
 .choice-cancel:hover {
-  color: #e0e0e0;
+  color: #d4e7dc;
 }
 
 /* Confirm */
 .confirm-msg {
-  background: #1e3a1e;
-  border: 1px solid #2d5a2d;
+  background: #142b1e;
+  border: 1px solid #1e4a2e;
   border-radius: 6px;
   padding: 10px;
   margin-bottom: 16px;
   font-size: 12px;
-  color: #a8d8a8;
+  color: #4ade80;
 }
 
 /* Timer status */
 .timer-status {
-  background: #22223a;
+  background: #141f1a;
   border-radius: 6px;
   padding: 12px;
   margin-bottom: 16px;
@@ -141,14 +141,14 @@ h1 {
 
 .timer-domain {
   font-size: 12px;
-  color: #d4a85c;
+  color: #facc15;
   font-weight: 600;
   margin-bottom: 8px;
 }
 
 .timer-status .timer-bar-track {
   height: 6px;
-  background: #1a1a2e;
+  background: #0d1512;
   border-radius: 3px;
   overflow: hidden;
   margin-bottom: 6px;
@@ -156,18 +156,18 @@ h1 {
 
 .timer-status .timer-bar-fill {
   height: 100%;
-  background: #a8d8a8;
+  background: #4ade80;
   border-radius: 3px;
   transition: width 0.3s;
 }
 
 .timer-status .timer-bar-fill.expired {
-  background: #e07070;
+  background: #f87171;
 }
 
 .timer-remaining {
   font-size: 11px;
-  color: #6b7b8d;
+  color: #5a7a68;
 }
 
 /* Timer setup */
@@ -184,23 +184,23 @@ h1 {
 
 .timer-setup-row input[type="number"] {
   width: 60px;
-  background: #22223a;
-  border: 1px solid #3a3a5a;
+  background: #141f1a;
+  border: 1px solid #2a3d32;
   border-radius: 4px;
   padding: 6px 8px;
-  color: #e0e0e0;
+  color: #d4e7dc;
   font-size: 13px;
   text-align: center;
   outline: none;
 }
 
 .timer-setup-row input[type="number"]:focus {
-  border-color: #d4a85c;
+  border-color: #facc15;
 }
 
 .timer-setup-unit {
   font-size: 12px;
-  color: #6b7b8d;
+  color: #5a7a68;
 }
 
 .timer-setup-actions {
@@ -219,7 +219,7 @@ h1 {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #6b7b8d;
+  color: #5a7a68;
   margin-bottom: 10px;
 }
 
@@ -231,7 +231,7 @@ h1 {
 }
 
 .stat-card {
-  background: #22223a;
+  background: #141f1a;
   border-radius: 6px;
   padding: 10px;
   display: flex;
@@ -242,7 +242,7 @@ h1 {
 .stat-number {
   font-size: 20px;
   font-weight: 700;
-  color: #a8d8a8;
+  color: #4ade80;
   line-height: 1.2;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -252,7 +252,7 @@ h1 {
 
 .stat-label {
   font-size: 10px;
-  color: #6b7b8d;
+  color: #5a7a68;
   margin-top: 2px;
 }
 
@@ -273,7 +273,7 @@ h1 {
 .domain-bar-name {
   width: 90px;
   text-align: right;
-  color: #b0b0b0;
+  color: #8aa896;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -283,21 +283,21 @@ h1 {
 .domain-bar-track {
   flex: 1;
   height: 8px;
-  background: #22223a;
+  background: #141f1a;
   border-radius: 4px;
   overflow: hidden;
 }
 
 .domain-bar-fill {
   height: 100%;
-  background: #a8d8a8;
+  background: #4ade80;
   border-radius: 4px;
   transition: width 0.3s;
 }
 
 .domain-bar-count {
   width: 24px;
-  color: #6b7b8d;
+  color: #5a7a68;
   font-size: 10px;
   flex-shrink: 0;
 }
@@ -309,16 +309,16 @@ h1 {
 /* Settings link */
 #settings-link {
   display: inline-block;
-  color: #6b7b8d;
+  color: #5a7a68;
   font-size: 11px;
   text-decoration: none;
   padding: 6px 10px;
-  border: 1px solid #2a2a4a;
+  border: 1px solid #1a2b23;
   border-radius: 4px;
   transition: all 0.2s;
 }
 
 #settings-link:hover {
-  color: #a8d8a8;
-  border-color: #a8d8a8;
+  color: #4ade80;
+  border-color: #4ade80;
 }

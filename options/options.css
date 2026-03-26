@@ -7,8 +7,8 @@
 }
 
 body {
-  background: #0f0f1a;
-  color: #c0c0c0;
+  background: #0d1512;
+  color: #8aa896;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 14px;
   line-height: 1.5;
@@ -23,7 +23,7 @@ body {
 }
 
 h1 {
-  color: #a8d8a8;
+  color: #4ade80;
   font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.03em;
@@ -31,14 +31,14 @@ h1 {
 }
 
 .subtitle {
-  color: #666;
+  color: #5a7a68;
   font-size: 12px;
   margin-bottom: 32px;
 }
 
 .section {
-  background: #161625;
-  border: 1px solid #252540;
+  background: #111e18;
+  border: 1px solid #1e3328;
   border-radius: 6px;
   margin-bottom: 16px;
 }
@@ -47,7 +47,7 @@ h1 {
   padding: 14px 18px;
   cursor: pointer;
   font-size: 14px;
-  color: #888;
+  color: #5a7a68;
   user-select: none;
   display: flex;
   align-items: center;
@@ -55,11 +55,11 @@ h1 {
 }
 
 .section summary:hover {
-  color: #b0b0b0;
+  color: #8aa896;
 }
 
 .section summary::marker {
-  color: #444;
+  color: #3a5a48;
 }
 
 .section-body {
@@ -67,8 +67,8 @@ h1 {
 }
 
 .badge {
-  background: #252540;
-  color: #666;
+  background: #1a2b23;
+  color: #5a7a68;
   font-size: 11px;
   padding: 2px 8px;
   border-radius: 10px;
@@ -83,28 +83,28 @@ h1 {
 
 input[type="text"] {
   flex: 1;
-  background: #0f0f1a;
-  border: 1px solid #303050;
+  background: #0d1512;
+  border: 1px solid #2a3d32;
   border-radius: 4px;
   padding: 8px 12px;
-  color: #e0e0e0;
+  color: #d4e7dc;
   font-size: 13px;
   outline: none;
 }
 
 input[type="text"]:focus {
-  border-color: #a8d8a8;
+  border-color: #4ade80;
 }
 
 input[type="text"]::placeholder {
-  color: #444;
+  color: #3a5a48;
 }
 
 button {
-  background: #252540;
-  border: 1px solid #353560;
+  background: #1a2b23;
+  border: 1px solid #2a3d32;
   border-radius: 4px;
-  color: #a8d8a8;
+  color: #4ade80;
   padding: 8px 16px;
   font-size: 13px;
   cursor: pointer;
@@ -112,7 +112,7 @@ button {
 }
 
 button:hover {
-  background: #353560;
+  background: #2a3d32;
 }
 
 /* Timer row in add form */
@@ -128,12 +128,12 @@ button:hover {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  color: #888;
+  color: #5a7a68;
   cursor: pointer;
 }
 
 .timer-toggle input[type="checkbox"] {
-  accent-color: #a8d8a8;
+  accent-color: #4ade80;
 }
 
 .timer-input-group {
@@ -148,39 +148,39 @@ button:hover {
 
 .timer-input-group input[type="number"] {
   width: 60px;
-  background: #0f0f1a;
-  border: 1px solid #303050;
+  background: #0d1512;
+  border: 1px solid #2a3d32;
   border-radius: 4px;
   padding: 4px 8px;
-  color: #e0e0e0;
+  color: #d4e7dc;
   font-size: 12px;
   outline: none;
   text-align: center;
 }
 
 .timer-input-group input[type="number"]:focus {
-  border-color: #a8d8a8;
+  border-color: #4ade80;
 }
 
 .timer-unit {
   font-size: 11px;
-  color: #666;
+  color: #5a7a68;
 }
 
 .hint {
-  color: #555;
+  color: #4a6a58;
   font-size: 11px;
 }
 
 .hint code {
-  color: #777;
-  background: #1a1a2e;
+  color: #6a8a78;
+  background: #141f1a;
   padding: 1px 4px;
   border-radius: 2px;
 }
 
 .error {
-  color: #e07070;
+  color: #f87171;
   font-size: 12px;
   min-height: 18px;
   margin-top: 4px;
@@ -191,7 +191,7 @@ button:hover {
 }
 
 .empty-msg {
-  color: #444;
+  color: #3a5a48;
   font-size: 13px;
   text-align: center;
   padding: 20px 0;
@@ -203,8 +203,8 @@ button:hover {
   align-items: center;
   justify-content: space-between;
   padding: 10px 12px;
-  background: #0f0f1a;
-  border: 1px solid #1e1e35;
+  background: #0d1512;
+  border: 1px solid #1a2b23;
   border-radius: 4px;
   margin-bottom: 6px;
 }
@@ -217,7 +217,7 @@ button:hover {
 }
 
 .pattern-text {
-  color: #b0b0b0;
+  color: #8aa896;
   font-size: 13px;
   font-family: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
   word-break: break-all;
@@ -230,11 +230,11 @@ button:hover {
 }
 
 .mode-blocked {
-  color: #e07070;
+  color: #f87171;
 }
 
 .mode-timer {
-  color: #d4a85c;
+  color: #facc15;
 }
 
 .pattern-actions {
@@ -248,7 +248,7 @@ button:hover {
 .pattern-item .timer-btn {
   background: none;
   border: 1px solid transparent;
-  color: #555;
+  color: #4a6a58;
   font-size: 14px;
   padding: 2px 6px;
   cursor: pointer;
@@ -256,15 +256,15 @@ button:hover {
 }
 
 .pattern-item .timer-btn:hover {
-  color: #d4a85c;
-  border-color: #d4a85c;
-  background: rgba(212, 168, 92, 0.1);
+  color: #facc15;
+  border-color: #facc15;
+  background: rgba(250, 204, 21, 0.1);
 }
 
 .pattern-item .delete-btn {
   background: none;
   border: 1px solid transparent;
-  color: #555;
+  color: #4a6a58;
   font-size: 16px;
   padding: 2px 8px;
   cursor: pointer;
@@ -272,13 +272,13 @@ button:hover {
 }
 
 .pattern-item .delete-btn:hover {
-  color: #e07070;
-  border-color: #e07070;
-  background: rgba(224, 112, 112, 0.1);
+  color: #f87171;
+  border-color: #f87171;
+  background: rgba(248, 113, 113, 0.1);
 }
 
 .mode-expired {
-  color: #e07070;
+  color: #f87171;
 }
 
 /* Inline timer editor */
@@ -286,12 +286,12 @@ button:hover {
   width: 100%;
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid #1e1e35;
+  border-top: 1px solid #1a2b23;
 }
 
 .editor-label {
   font-size: 11px;
-  color: #666;
+  color: #5a7a68;
   margin-bottom: 8px;
 }
 
@@ -304,23 +304,23 @@ button:hover {
 
 .editor-input {
   width: 60px;
-  background: #161625;
-  border: 1px solid #303050;
+  background: #111e18;
+  border: 1px solid #2a3d32;
   border-radius: 4px;
   padding: 5px 8px;
-  color: #e0e0e0;
+  color: #d4e7dc;
   font-size: 13px;
   text-align: center;
   outline: none;
 }
 
 .editor-input:focus {
-  border-color: #d4a85c;
+  border-color: #facc15;
 }
 
 .editor-unit {
   font-size: 11px;
-  color: #666;
+  color: #5a7a68;
 }
 
 .editor-btn-row {
@@ -332,52 +332,52 @@ button:hover {
 .editor-save {
   font-size: 11px;
   padding: 4px 10px;
-  color: #a8d8a8;
+  color: #4ade80;
 }
 
 .editor-block {
   font-size: 11px;
   padding: 4px 10px;
-  color: #e07070;
-  border-color: #402020;
-  background: #1a1015;
+  color: #f87171;
+  border-color: #3a1a1a;
+  background: #1a1210;
 }
 
 .editor-block:hover {
-  background: #301520;
-  border-color: #e07070;
+  background: #2a1a18;
+  border-color: #f87171;
 }
 
 .editor-cancel {
   font-size: 11px;
   padding: 4px 10px;
-  color: #666;
+  color: #5a7a68;
   background: none;
   border-color: transparent;
 }
 
 .editor-cancel:hover {
-  color: #b0b0b0;
+  color: #8aa896;
 }
 
 /* Warning / confirmation area */
 .editor-warning {
   margin-top: 10px;
   padding: 10px;
-  background: #1a1520;
-  border: 1px solid #3a2030;
+  background: #1a1a10;
+  border: 1px solid #3a3520;
   border-radius: 4px;
 }
 
 .warning-text {
   font-size: 12px;
-  color: #d4a85c;
+  color: #facc15;
   margin-bottom: 8px;
   line-height: 1.5;
 }
 
 .warning-final {
-  color: #e07070;
+  color: #f87171;
 }
 
 .warning-confirm {
@@ -386,16 +386,16 @@ button:hover {
   font-size: 11px;
   padding: 6px 10px;
   margin-bottom: 6px;
-  color: #d4a85c;
-  background: #252540;
-  border: 1px solid #3a3050;
+  color: #facc15;
+  background: #1a2b23;
+  border: 1px solid #2a3d32;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .warning-confirm:hover {
-  background: #353560;
-  border-color: #d4a85c;
+  background: #2a3d32;
+  border-color: #facc15;
 }
 
 .warning-cancel {
@@ -403,27 +403,27 @@ button:hover {
   width: 100%;
   font-size: 11px;
   padding: 6px 10px;
-  color: #a8d8a8;
-  background: #1a2a1a;
-  border: 1px solid #2a3a2a;
+  color: #4ade80;
+  background: #0d1f14;
+  border: 1px solid #1e3328;
   border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
 }
 
 .warning-cancel:hover {
-  background: #2a3a2a;
-  border-color: #a8d8a8;
+  background: #1a2b23;
+  border-color: #4ade80;
 }
 
 .warning-input {
   display: block;
   width: 100%;
-  background: #161625;
-  border: 1px solid #303050;
+  background: #111e18;
+  border: 1px solid #2a3d32;
   border-radius: 4px;
   padding: 6px 10px;
-  color: #e0e0e0;
+  color: #d4e7dc;
   font-size: 13px;
   text-align: center;
   outline: none;
@@ -431,7 +431,7 @@ button:hover {
 }
 
 .warning-input:focus {
-  border-color: #d4a85c;
+  border-color: #facc15;
 }
 
 @keyframes shake {
@@ -442,7 +442,7 @@ button:hover {
 
 .shake {
   animation: shake 0.3s ease-in-out;
-  border-color: #e07070 !important;
+  border-color: #f87171 !important;
 }
 
 .hidden {
