@@ -111,12 +111,13 @@ async function fetchTimerBaseline() {
     });
     if (!status?.active) return;
 
-    // Only update baseline if background value has caught up to or passed
-    // our interpolated value, to prevent jumps backward
-    if (timerBaseline) {
+    // Only update baseline if background value is close to our interpolation
+    // to prevent jumps in either direction
+    if (timerBaseline && !status.expired) {
       const interpolated = timerBaseline.elapsedSeconds + (Date.now() - timerBaseline.fetchedAt) / 1000;
-      if (status.elapsedSeconds < interpolated && !status.expired) {
-        // Background hasn't ticked yet — keep our interpolation
+      const drift = Math.abs(status.elapsedSeconds - interpolated);
+      if (drift < 35) {
+        // Within one alarm tick — keep smooth interpolation, just sync config
         timerBaseline.timerMinutes = status.timerMinutes;
         return;
       }
