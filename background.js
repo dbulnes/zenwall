@@ -7,7 +7,7 @@ import {
 import { buildAllRules } from './lib/patterns.js';
 import { findMatchingPattern } from './lib/matcher.js';
 
-const TICK_SECONDS = 30;
+const TICK_SECONDS = 1;
 const blockedPageUrl = chrome.runtime.getURL('blocked/blocked.html');
 
 // --- declarativeNetRequest rules (fully blocked sites only) ---
@@ -34,8 +34,17 @@ async function blockTab(tabId, url, reason) {
   });
 }
 
-// Alarm tick: track time on active tab if it matches a timed pattern
+let lastTickTime = Date.now();
+
 async function onTimerTick() {
+  const now = Date.now();
+  const actualElapsed = Math.round((now - lastTickTime) / 1000);
+  lastTickTime = now;
+
+  // Use actual wall-clock delta instead of fixed TICK_SECONDS
+  // to stay accurate even if the tick was delayed
+  const secondsToAdd = Math.min(actualElapsed, 60); // cap at 60s to handle sleep/wake
+
   let tabs;
   try {
     tabs = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
@@ -48,7 +57,7 @@ async function onTimerTick() {
   const match = findMatchingPattern(tab.url, timerPatterns);
   if (!match) return;
 
-  const totalElapsed = await addTimerSeconds(match.id, TICK_SECONDS);
+  const totalElapsed = await addTimerSeconds(match.id, secondsToAdd);
   const limitSeconds = match.timerMinutes * 60;
 
   if (totalElapsed >= limitSeconds) {
@@ -58,6 +67,22 @@ async function onTimerTick() {
       recordBlock(domain);
     } catch {}
   }
+}
+
+// Use a self-rescheduling alarm to tick every 5 seconds.
+// chrome.alarms minimum is 30s, so we use it as a keepalive
+// and run the actual tick logic via setTimeout.
+let tickInterval = null;
+
+function startTickLoop() {
+  if (tickInterval) return;
+  lastTickTime = Date.now();
+  tickInterval = setInterval(onTimerTick, TICK_SECONDS * 1000);
+}
+
+function ensureAlarmKeepalive() {
+  // Alarm keeps service worker from going idle
+  chrome.alarms.create('zenwall-keepalive', { periodInMinutes: 0.5 });
 }
 
 // Intercept navigation to timed sites that are already expired
@@ -83,16 +108,21 @@ async function onNavigation(details) {
 
 chrome.runtime.onInstalled.addListener(async () => {
   await syncRules();
-  chrome.alarms.create('zenwall-timer-tick', { periodInMinutes: 0.5 });
+  ensureAlarmKeepalive();
+  startTickLoop();
 });
 
 chrome.runtime.onStartup.addListener(async () => {
   await syncRules();
-  chrome.alarms.create('zenwall-timer-tick', { periodInMinutes: 0.5 });
+  ensureAlarmKeepalive();
+  startTickLoop();
 });
 
+// Keepalive alarm also restarts the tick loop if service worker was suspended
 chrome.alarms.onAlarm.addListener((alarm) => {
-  if (alarm.name === 'zenwall-timer-tick') onTimerTick();
+  if (alarm.name === 'zenwall-keepalive') {
+    startTickLoop();
+  }
 });
 
 chrome.webNavigation.onCommitted.addListener(onNavigation);
@@ -116,6 +146,10 @@ chrome.webNavigation.onCompleted.addListener((details) => {
 onPatternsChanged(async () => {
   await syncRules();
 });
+
+// Start tick loop immediately when script loads
+startTickLoop();
+ensureAlarmKeepalive();
 
 // --- Message handlers ---
 

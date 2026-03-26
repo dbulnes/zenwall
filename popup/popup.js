@@ -116,7 +116,7 @@ async function fetchTimerBaseline() {
     if (timerBaseline && !status.expired) {
       const interpolated = timerBaseline.elapsedSeconds + (Date.now() - timerBaseline.fetchedAt) / 1000;
       const drift = Math.abs(status.elapsedSeconds - interpolated);
-      if (drift < 35) {
+      if (drift < 3) {
         // Within one alarm tick — keep smooth interpolation, just sync config
         timerBaseline.timerMinutes = status.timerMinutes;
         return;
@@ -271,8 +271,8 @@ updateStatus();
 updateStats();
 setupBlockButton().then(() => {
   fetchTimerBaseline();
-  // Re-fetch baseline from background every 10s to stay synced
-  setInterval(fetchTimerBaseline, 10000);
-  // Interpolate the display every 500ms for smooth countdown
-  setInterval(renderTimer, 500);
+  // Re-fetch baseline from background every 2s to stay tightly synced
+  setInterval(fetchTimerBaseline, 2000);
+  // Interpolate the display every 200ms for smooth countdown
+  setInterval(renderTimer, 200);
 });
