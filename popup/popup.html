@@ -8,6 +8,39 @@
   <div class="container">
     <h1>Zenwall</h1>
     <p id="status">Loading...</p>
+
+    <!-- Block current site -->
+    <div id="block-section">
+      <button id="block-btn" class="block-btn">Block this site</button>
+    </div>
+
+    <!-- Choice dialog (hidden by default) -->
+    <div id="choice-dialog" class="choice-dialog hidden">
+      <p class="choice-label">What do you want to block?</p>
+      <button id="block-domain" class="choice-btn"></button>
+      <button id="block-url" class="choice-btn choice-btn-secondary"></button>
+      <button id="choice-cancel" class="choice-cancel">Cancel</button>
+    </div>
+
+    <!-- Confirmation (hidden by default) -->
+    <div id="confirm-msg" class="confirm-msg hidden"></div>
+
+    <!-- Stats -->
+    <div id="stats-section" class="stats-section">
+      <div class="stats-header">Stats</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number" id="total-blocks">0</span>
+          <span class="stat-label">Total blocks</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="top-domain">-</span>
+          <span class="stat-label" id="top-domain-label">Top blocked</span>
+        </div>
+      </div>
+      <div id="domain-bars" class="domain-bars"></div>
+    </div>
+
     <a href="#" id="settings-link">Manage blocked sites &rarr;</a>
   </div>
   <script src="popup.js"></script>

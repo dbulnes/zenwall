@@ -5,7 +5,9 @@
   "description": "Block distracting websites with calming nature scenes and witty messages.",
   "permissions": [
     "storage",
-    "declarativeNetRequest"
+    "declarativeNetRequest",
+    "activeTab",
+    "webNavigation"
   ],
   "host_permissions": [
     "<all_urls>"

@@ -1,4 +1,4 @@
-import { getBlockedPatterns, onPatternsChanged } from './lib/storage.js';
+import { getBlockedPatterns, addPattern, getStats, recordBlock, onPatternsChanged } from './lib/storage.js';
 import { buildAllRules } from './lib/patterns.js';
 
 async function syncRules() {
@@ -33,6 +33,21 @@ chrome.runtime.onInstalled.addListener(async () => {
 // Sync rules on browser startup
 chrome.runtime.onStartup.addListener(syncRules);
 
+// Track blocks by watching navigations to the blocked page
+const blockedPagePath = chrome.runtime.getURL('blocked/blocked.html');
+chrome.webNavigation.onCompleted.addListener((details) => {
+  if (details.frameId !== 0) return;
+  if (!details.url.startsWith(blockedPagePath)) return;
+  try {
+    const params = new URL(details.url).searchParams;
+    const blockedUrl = params.get('url');
+    if (blockedUrl) {
+      const domain = new URL(blockedUrl).hostname;
+      recordBlock(domain);
+    }
+  } catch { /* ignore parse errors */ }
+});
+
 // Re-sync whenever patterns change
 onPatternsChanged(async () => {
   await syncRules();
@@ -44,6 +59,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     getBlockedPatterns().then((patterns) => {
       sendResponse({ count: patterns.length });
     });
-    return true; // async response
+    return true;
+  }
+
+  if (message.type === 'addPattern') {
+    addPattern(message.pattern).then((entry) => {
+      sendResponse({ success: true, entry });
+    });
+    return true;
+  }
+
+  if (message.type === 'getStats') {
+    getStats().then((stats) => {
+      sendResponse(stats);
+    });
+    return true;
   }
 });
