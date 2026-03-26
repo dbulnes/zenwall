@@ -20,12 +20,12 @@ A Chrome extension that blocks distracting websites and replaces them with calmi
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/blocksite-oss.git
-   cd blocksite-oss
+   git clone https://github.com/dbulnes/zenwall.git
+   cd zenwall
    ```
 2. Open `chrome://extensions` in Chrome
 3. Enable **Developer mode** (top right toggle)
-4. Click **Load unpacked** and select the `blocksite-oss` directory
+4. Click **Load unpacked** and select the `zenwall` directory
 5. The Zenwall icon should appear in your toolbar — pin it for easy access
 
 ### Updating
