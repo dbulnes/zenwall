@@ -111,6 +111,17 @@ async function fetchTimerBaseline() {
     });
     if (!status?.active) return;
 
+    // Only update baseline if background value has caught up to or passed
+    // our interpolated value, to prevent jumps backward
+    if (timerBaseline) {
+      const interpolated = timerBaseline.elapsedSeconds + (Date.now() - timerBaseline.fetchedAt) / 1000;
+      if (status.elapsedSeconds < interpolated && !status.expired) {
+        // Background hasn't ticked yet — keep our interpolation
+        timerBaseline.timerMinutes = status.timerMinutes;
+        return;
+      }
+    }
+
     timerBaseline = {
       fetchedAt: Date.now(),
       elapsedSeconds: status.elapsedSeconds,
