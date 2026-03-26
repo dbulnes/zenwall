@@ -1,4 +1,4 @@
-# BlockSite
+# Zenwall
 
 A Chrome extension that blocks distracting websites and replaces them with calming nature photographs and witty messages.
 
@@ -26,16 +26,16 @@ A Chrome extension that blocks distracting websites and replaces them with calmi
 2. Open `chrome://extensions` in Chrome
 3. Enable **Developer mode** (top right toggle)
 4. Click **Load unpacked** and select the `blocksite-oss` directory
-5. The BlockSite icon should appear in your toolbar — pin it for easy access
+5. The Zenwall icon should appear in your toolbar — pin it for easy access
 
 ### Updating
 
-After pulling new changes, go to `chrome://extensions` and click the refresh icon on the BlockSite card.
+After pulling new changes, go to `chrome://extensions` and click the refresh icon on the Zenwall card.
 
 
 ## Usage
 
-1. Click the BlockSite icon in your toolbar
+1. Click the Zenwall icon in your toolbar
 2. Click "Manage blocked sites" to open settings
 3. Expand "Add New Pattern" and enter a URL pattern:
    - `*.reddit.com` — blocks reddit and all subdomains

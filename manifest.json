@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "BlockSite",
+  "name": "Zenwall",
   "version": "1.0.0",
   "description": "Block distracting websites with calming nature scenes and witty messages.",
   "permissions": [

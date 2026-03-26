@@ -3,9 +3,9 @@
 1. **Register as a developer** at [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole) — one-time $5 registration fee
 2. **Create a ZIP** of the extension (exclude dev files):
    ```bash
-   zip -r blocksite.zip . -x ".git/*" -x ".claude/*" -x ".gitignore" -x "*.md"
+   zip -r zenwall.zip . -x ".git/*" -x ".claude/*" -x ".gitignore" -x "*.md"
    ```
-3. **Upload** — in the Developer Dashboard, click "New Item" and upload `blocksite.zip`
+3. **Upload** — in the Developer Dashboard, click "New Item" and upload `zenwall.zip`
 4. **Fill in listing details**:
    - Name, description, category (Productivity)
    - Upload screenshots (at least 1 at 1280x800 or 640x400)
