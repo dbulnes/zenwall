@@ -109,15 +109,16 @@ function init() {
     messageEl.textContent = getRandom(MESSAGES);
   }
 
-  const wouldLoop = !!blockedUrl;
-  backBtn.textContent = wouldLoop ? 'Go to DuckDuckGo' : 'Go Back';
+  const blockPagePrefix = chrome.runtime.getURL('blocked/blocked.html');
+  const referrer = document.referrer;
+  const canGoBack = referrer && !referrer.startsWith(blockPagePrefix);
+
+  backBtn.textContent = canGoBack ? 'Go Back' : 'Go to DuckDuckGo';
   backBtn.addEventListener('click', () => {
-    if (wouldLoop) {
-      window.location.href = 'https://duckduckgo.com';
-    } else if (window.history.length > 1) {
+    if (canGoBack) {
       window.history.back();
     } else {
-      window.close();
+      window.location.href = 'https://duckduckgo.com';
     }
   });
 }
