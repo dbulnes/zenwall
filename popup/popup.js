@@ -22,6 +22,7 @@ const timerSetupConfirm = document.getElementById('timer-setup-confirm');
 const timerSetupCancel = document.getElementById('timer-setup-cancel');
 
 let currentTab = null;
+let timerBaseline = null; // { fetchedAt, elapsedSeconds, timerMinutes }
 
 async function getCurrentTab() {
   const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
@@ -31,7 +32,7 @@ async function getCurrentTab() {
 function formatTime(seconds) {
   if (seconds <= 0) return '0s';
   const m = Math.floor(seconds / 60);
-  const s = seconds % 60;
+  const s = Math.round(seconds % 60);
   if (m === 0) return `${s}s`;
   return `${m}m ${s}s`;
 }
@@ -101,7 +102,7 @@ async function updateStats() {
   } catch {}
 }
 
-async function checkTimerStatus() {
+async function fetchTimerBaseline() {
   if (!currentTab?.url) return;
   try {
     const status = await chrome.runtime.sendMessage({
@@ -110,25 +111,48 @@ async function checkTimerStatus() {
     });
     if (!status?.active) return;
 
-    timerStatusEl.classList.remove('hidden');
+    timerBaseline = {
+      fetchedAt: Date.now(),
+      elapsedSeconds: status.elapsedSeconds,
+      timerMinutes: status.timerMinutes,
+      expired: status.expired,
+    };
 
+    timerStatusEl.classList.remove('hidden');
     const domain = new URL(currentTab.url).hostname.replace(/^www\./, '');
     timerDomainEl.textContent = domain;
-
-    const totalSeconds = status.timerMinutes * 60;
-    const pct = Math.round((status.elapsedSeconds / totalSeconds) * 100);
-    timerBarFill.style.width = `${Math.min(pct, 100)}%`;
-
-    if (status.expired) {
-      timerBarFill.classList.add('expired');
-      timerRemainingEl.textContent = 'Time expired for today';
-    } else {
-      timerRemainingEl.textContent = `${formatTime(status.remainingSeconds)} remaining today`;
-    }
-
-    // Hide block button since site is already managed
     blockSection.classList.add('hidden');
+
+    renderTimer();
   } catch {}
+}
+
+function renderTimer() {
+  if (!timerBaseline) return;
+
+  const limitSeconds = timerBaseline.timerMinutes * 60;
+
+  if (timerBaseline.expired) {
+    timerBarFill.style.width = '100%';
+    timerBarFill.classList.add('expired');
+    timerRemainingEl.textContent = 'Time expired for today';
+    return;
+  }
+
+  // Interpolate: add seconds since we last fetched from background
+  const elapsed = timerBaseline.elapsedSeconds + (Date.now() - timerBaseline.fetchedAt) / 1000;
+  const remaining = Math.max(0, limitSeconds - elapsed);
+  const pct = Math.min(100, Math.round((elapsed / limitSeconds) * 100));
+
+  timerBarFill.style.width = `${pct}%`;
+  timerBarFill.classList.remove('expired');
+
+  if (remaining <= 0) {
+    timerBarFill.classList.add('expired');
+    timerRemainingEl.textContent = 'Time expired for today';
+  } else {
+    timerRemainingEl.textContent = `${formatTime(remaining)} remaining today`;
+  }
 }
 
 async function setupBlockButton() {
@@ -234,7 +258,9 @@ settingsLink.addEventListener('click', (e) => {
 updateStatus();
 updateStats();
 setupBlockButton().then(() => {
-  checkTimerStatus();
-  // Refresh timer countdown every second while popup is open
-  setInterval(checkTimerStatus, 500);
+  fetchTimerBaseline();
+  // Re-fetch baseline from background every 10s to stay synced
+  setInterval(fetchTimerBaseline, 10000);
+  // Interpolate the display every 500ms for smooth countdown
+  setInterval(renderTimer, 500);
 });
