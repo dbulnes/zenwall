@@ -68,16 +68,8 @@ function init() {
   // Set random message
   messageEl.textContent = getRandomMessage();
 
-  // Show blocked URL (truncated)
-  const url = getBlockedUrl();
-  if (url) {
-    try {
-      const parsed = new URL(url);
-      urlEl.textContent = parsed.hostname + parsed.pathname;
-    } catch {
-      urlEl.textContent = url.slice(0, 80);
-    }
-  }
+  // Hide blocked URL element
+  urlEl.style.display = 'none';
 
   // Go back button
   backBtn.addEventListener('click', () => {
